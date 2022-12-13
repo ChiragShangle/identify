@@ -4,7 +4,7 @@ def linker(language, search_keyword, face_search=None, file_format=None, file=No
     if face_search==None:
     
         obj = script.ArchiveIdentifier(language=language, search_keyword = search_keyword, file_format = file_format, file=file)
-       
+        print(obj)
         obj.run()
        
         obj.search_and_display()
@@ -16,3 +16,4 @@ def image_save(img):
         # and write them to the destination file
         for chunk in img.chunks():
             f.write(chunk)
+    return 'utils/images_file.pdf_dir/input_image.jpg'
