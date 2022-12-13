@@ -21,8 +21,10 @@ class ArchiveIdentifier:
         self.file = file  # Original file
 
         self.images_file_dir = 'images_file.pdf_dir'
-        pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
-        self.face_cascade = cv.CascadeClassifier("haarcascade.xml")
+        # pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
+        
+        pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files (x86)/Tesseract-OCR"
+        self.face_cascade = cv.CascadeClassifier(r"utils/haarcascade.xml")
 
 
         '''
@@ -31,11 +33,11 @@ class ArchiveIdentifier:
         if self.file_format=='pdf':
             self.convert_pdf_to_images()
             self.convert_image_into_zip()
-            self.file = r"zip_file.zip"
+            self.file = r"utils/zip_file.zip"
 
         if self.file_format=='image':
             self.convert_image_into_zip()
-            self.file = r"zip_file.zip"
+            self.file = r"utils/zip_file.zip"
 
         '''
         Convert into zip first
@@ -76,15 +78,19 @@ class ArchiveIdentifier:
 
     def run(self):
         for f in self.inflist:
+            print('chirag')
             ifile = self.zip_file.open(f)
+            
             img = Image.open(ifile)
 
             imggray = img.convert("L")
+            
             from pytesseract import Output
             # text = pytesseract.image_to_string(imggray, output_type=Output.DICT, lang="eng")
             # print(text['text'])
 
             data = pytesseract.image_to_data(imggray, output_type='dict', lang='eng')
+            print (data)
             boxes = len(data['level'])
             vermelho = (0, 0, 255)
             for i in range(boxes):
@@ -152,7 +158,7 @@ class ArchiveIdentifier:
 
 
     def convert_image_into_zip(self):
-        shutil.make_archive("zip_file", 'zip', self.images_file_dir)
+        shutil.make_archive("utils/zip_file", 'zip', self.images_file_dir)
         
     def convert_pdf_to_images(self):
         from pdf2jpg import pdf2jpg

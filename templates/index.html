@@ -247,7 +247,7 @@
                       <div class="card-body">
                         
 						<div class="content-area">
-							
+						
                           <!--/ Blog post tags -->
                           <!-- Post comments -->
                           <div class="comment-section">
@@ -255,31 +255,49 @@
                             <div class="leave-comment">
                               <h5 class="commets-title">Use English/Hindi Newspapers</h5>
                               <form
-                                action="#"
+                                action="/identify"
+                                enctype="multipart/form-data"
                                 method="post"
                                 accept-charset="utf-8"
                               >
+                              {% csrf_token %}
                                 <input
                                   type="text"
                                   class="form-control mb-4"
-                                  name="name"
+                                  name="keyword"
                                   placeholder="Search Keyword"
                                 />
 								<select class="form-control mb-4"
+                name="file_type"
 								
 								placeholder="Choose File Type">
 								
 								<option  placeholder="Choose File Type">Choose File Type</option>
-									<option value="Zip">Zip</option>
+									<option value="zip">Zip</option>
 									<option value="image">Jpg/png</option>
 									
-									<option value="Pdf">Pdf</option>
+									<option value="pdf">Pdf</option>
+								</select>
+                <select class="form-control mb-4"
+								name="language"
+								placeholder="Language">
+								
+								<option  placeholder="Language">Language</option>
+									<option value="English">English</option>
+									<option value="Hindi">हिन्दी</option>
+									
 								</select>
                                 <input type="file"
                                   rows="4"
                                   class="form-control"
-                                  name="message"
+                                  name="file"
                                   placeholder="File Upload"
+                                ></input>
+                                <input type="file"
+                                  rows="4"
+                                  class="form-control"
+                                  name="face"
+                                  placeholder="Face Upload"
                                 ></input>
                                 <button
                                   type="submit"
