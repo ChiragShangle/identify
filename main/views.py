@@ -6,11 +6,12 @@ def identify_people(request):
     keyword = request.POST.get('keyword')
     file_type = request.POST.get('file_type')
     file_ = request.FILES.get('file')
-    helper.image_save(file_)
+    file_path =  helper.image_save(file_)
     language = request.POST.get('language')
     face = request.FILES.get("face_search")
-    print('hello')
-    helper.linker(language=language, search_keyword = keyword, file_format = file_type, file=file_)
+    
+    print(keyword, file_path)
+    helper.linker(language=language, search_keyword = keyword, file_format = file_type, file=file_path)
     return HttpResponse('Success')
 
 

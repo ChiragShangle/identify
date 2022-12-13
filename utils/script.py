@@ -20,10 +20,10 @@ class ArchiveIdentifier:
         self.file_format = file_format  # File format (pdf/ jpg/ zip/ png)
         self.file = file  # Original file
 
-        self.images_file_dir = 'images_file.pdf_dir'
-        # pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
+        self.images_file_dir = 'utils/images_file.pdf_dir'
+        pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
         
-        pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files (x86)/Tesseract-OCR"
+        # pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files (x86)/Tesseract-OCR"
         self.face_cascade = cv.CascadeClassifier(r"utils/haarcascade.xml")
 
 
@@ -36,6 +36,7 @@ class ArchiveIdentifier:
             self.file = r"utils/zip_file.zip"
 
         if self.file_format=='image':
+            print('checkg')
             self.convert_image_into_zip()
             self.file = r"utils/zip_file.zip"
 
@@ -90,19 +91,15 @@ class ArchiveIdentifier:
             # print(text['text'])
 
             data = pytesseract.image_to_data(imggray, output_type='dict', lang='eng')
-            print (data)
+            
             boxes = len(data['level'])
             vermelho = (0, 0, 255)
             for i in range(boxes):
+                print(self.search_keyword)
+                print(data['text'][i])
                 if self.search_keyword in data['text'][i]:
-                    print(data['text'][i])
-                    print(data['left'][i], data['top'][i], data['width'][i], data['height'][i], data['text'][i])
-                    open_cv_image = np.array(img)
-                    open_cv_image = open_cv_image[:, :, ::-1].copy()
-                    cv.namedWindow('finalImg', cv.WINDOW_NORMAL)
+                    open_cv_image = cv.cvtColor(np.array(img.convert("RGB")), cv.COLOR_RGB2BGR)
                     cv.rectangle(open_cv_image, (data['left'][i]-20, data['top'][i]-20), (data['left'][i]+data['width'][i]+20, data['top'][i]+data['height'][i]+20), vermelho, 4)
-                    # cv.imshow('acsd', open_cv_image)
-                    
                     
                     '''
                     cropping the main image to show all the content along with focussed rectangle on text or image 
@@ -116,10 +113,9 @@ class ArchiveIdentifier:
                     cropped_right_column = min(data['left'][i]+data['width'][i]+600, width)
 
                     cropped_image = open_cv_image[cropped_top_row:cropped_bottom_row, cropped_left_column:cropped_right_column] # Slicing to crop the image
-                    cv.imshow("cropped_image", cropped_image)
-
-                    # cv.imshow("finalImg",open_cv_image)
-                    cv.waitKey(3000)
+                    my_uuid = uuid.uuid4()
+                    cv.imwrite(f'utils/{my_uuid}.jpg', cropped_image)
+                    
 
 
 
