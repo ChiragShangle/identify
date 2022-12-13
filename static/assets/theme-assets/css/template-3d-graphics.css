@@ -3507,7 +3507,7 @@ header .navbar.navbar-shadow {
 .blog-area .blog-head-content img {
   color : #FFFFFF;
   z-index : 6;
-  height : 60vh;
+  height : 50vh;
   opacity : 0.25;
   width : 100%;
 }

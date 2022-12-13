@@ -11,7 +11,7 @@ def identify_people(request):
     face = request.FILES.get("face_search")
     print('hello')
     helper.linker(language=language, search_keyword = keyword, file_format = file_type, file=file_)
-    return HttpResponse('Success')
+    return render(request,"index2.html")
 
 
 def checking(request):
