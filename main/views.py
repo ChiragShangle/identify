@@ -9,10 +9,12 @@ def identify_people(request):
     file_path =  helper.image_save(file_)
     language = request.POST.get('language')
     face = request.FILES.get("face_search")
+
     
     print(keyword, file_path)
     helper.linker(language=language, search_keyword = keyword, file_format = file_type, file=file_path)
-    return HttpResponse('Success')
+     return render(request,"index2.html")
+
 
 
 def checking(request):
