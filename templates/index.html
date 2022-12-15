@@ -8,26 +8,14 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"
     />
-    <meta
-      name="description"
-      content="Crypto ICO is a responsive modern &amp; clean cryptocurrency website landing page html with admin dashboard template , specially created for ICO Startup agencies and digital crypto currency investment website."
-    />
-    <meta
-      name="keywords"
-      content="crypto, ico, cryptocurrency, bitcoin, landing, admin, dashboard, template, modern, clean, responsive"
-    />
+   
     <meta name="author" content="PIXINVENT" />
-    <title>Crypto ICO Blog page</title>
-    <link
-      rel="apple-touch-icon"
-      href="{%static 'assets/theme-assets/images/ico/apple-icon-120.png'%}"
-    />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="{%static 'assets/theme-assets/images/ico/favicon.ico'%}"
-    />
+    <title>Person Identifier from Archives</title>
+ 
+    <script src="https://kit.fontawesome.com/1d21464267.js" crossorigin="anonymous"></script>
     <!--Google Fonts-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link
       href="https://fonts.googleapis.com/css?family=Comfortaa:300,400,500,700"
       rel="stylesheet"
@@ -80,6 +68,26 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css'%}" />
     <!-- END Custom CSS-->
+    <style>
+      .file{
+        display: flex;
+        justify-content: center;
+      }
+      input{
+        display: none;
+      }
+      label{
+        text-align:center;
+        padding:3%;
+        width:48%;
+        margin:1% ;
+        border:thin solid black;
+        cursor:pointer;
+      }
+      #imageName{
+        color:green;
+      }
+  </style>
   </head>
   <body
     class="1-column inner-page template-3g-graphics"
@@ -255,38 +263,43 @@
                                   name="keyword"
                                   placeholder="Search Keyword"
                                 />
-								<select class="form-control mb-4"
+								<select class="form-select  mb-4"
                 name="file_type"
+							>
 								
-								placeholder="Choose File Type">
-								
-								<option  placeholder="Choose File Type">Choose File Type</option>
+								<option value="" disabled selected hidden>Choose File Type</option>
 									<option value="zip">Zip</option>
 									<option value="image">Jpg/png</option>
 									
 									<option value="pdf">Pdf</option>
 								</select>
-                <select class="form-control mb-4"
-								name="language"
-								placeholder="Language">
-								
-								<option  placeholder="Language">Language</option>
+               
+                <select class=" form-select  mb-4 "
+								name="language" aria-label="Default select example">
+                  <option value="" disabled selected hidden>Language</option>
 									<option value="English">English</option>
 									<option value="Hindi">हिन्दी</option>
-									
-								</select>
-                                <input type="file"
-                                  rows="4"
-                                  class="form-control"
-                                  name="file"
-                                  placeholder="File Upload"
-                                ></input>
-                                <input type="file"
-                                  rows="4"
-                                  class="form-control"
-                                  name="face"
-                                  placeholder="Face Upload"
-                                ></input>
+                </select>
+                <div class="file">
+                <label for="inputTag">
+                  Select File <br/>
+                  <i class="fa fa-2x fa-solid fa-file"></i>
+                  <input id="inputTag"  
+                  name="file"
+                  placeholder="File Upload" type="file"/>
+                  <br/>
+                  <span id="imageName"></span>
+                </label>
+                <br/>
+                <label for="inputTag">
+                  Select Face Image <br/>
+                  <i class="fa fa-2x fa-camera"></i>
+                  <input id="inputTag2" row="4"
+                  name="face" type="file"/>
+                  <br/>
+                  <span id="imageName2"></span>
+                </label>
+              </div>    
                                 <button
                                   type="submit"
                                   class="btn btn-lg btn-glow btn-gradient-blue btn-round"
@@ -717,6 +730,25 @@
     <!-- END PAGE VENDOR JS-->
     <!-- BEGIN THEME JS-->
     <script src="{%static 'assets/theme-assets/js/theme.js'%}"></script>
+    <script>
+      let input = document.getElementById("inputTag");
+      let imageName = document.getElementById("imageName")
+
+      input.addEventListener("change", ()=>{
+          let inputImage = document.querySelector("input[type=file]").files[0];
+
+          imageName.innerText = inputImage.name;
+      })
+  let input2 = document.getElementById("inputTag2");
+  let imageName2 = document.getElementById("imageName2")
+
+  input.addEventListener("change", ()=>{
+      let inputImage2 = document.querySelector("input[type=file]").files[0];
+
+      imageName2.innerText = inputImage2.name;
+  })
+  
+</script>
     <!-- END CRYPTO JS-->
     <!-- BEGIN PAGE LEVEL JS-->
     <!-- END PAGE LEVEL JS-->
