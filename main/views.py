@@ -26,7 +26,7 @@ def identify_people(request):
         'file_names': file_names,
     }
 
-    return render(request, 'index2.html', context)    
+    return render(request, 'index3.html', context)    
 
 
 
@@ -34,5 +34,5 @@ def checking(request):
     return render(request,"index.html")
     
 def test(request):
-    return render(request,"index3.html")
+    return render(request,"index2.html")
     
