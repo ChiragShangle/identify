@@ -21,9 +21,11 @@ class ArchiveIdentifier:
         self.file = file  # Original file
 
         self.images_file_dir = 'utils/images_file.pdf_dir'
-        pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
-        
+        # pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
+        print(1)
         # pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files (x86)/Tesseract-OCR"
+        pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
+        print(2)
         self.face_cascade = cv.CascadeClassifier(r"utils/haarcascade.xml")
 
 
@@ -79,7 +81,6 @@ class ArchiveIdentifier:
 
     def run(self):
         for f in self.inflist:
-            print('chirag')
             ifile = self.zip_file.open(f)
             
             img = Image.open(ifile)

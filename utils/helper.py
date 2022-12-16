@@ -17,3 +17,4 @@ def image_save(img):
         for chunk in img.chunks():
             f.write(chunk)
     return 'utils/images_file.pdf_dir/input_image.jpg'
+
