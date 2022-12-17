@@ -16,23 +16,15 @@ def identify_people(request):
     helper.linker(language=language, search_keyword = keyword, file_format = file_type, file=file_path)
     directory = 'utils/'
     file_names = os.listdir(directory)
-    # files = []
-    # for x in file_names:
-    #     x = "{% static \'assets\img\x5c" + x + "\'%}"
-    #     files.append(x)
-    # print(files)   
-    # Pass the array of file names to the template context
+    
     context = {
         'file_names': file_names,
     }
 
-    return render(request, 'index3.html', context)    
+    return render(request, 'result.html', context)    
 
 
 
 def checking(request):
     return render(request,"index.html")
-    
-def test(request):
-    return render(request,"index2.html")
     
