@@ -1,30 +1,44 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from utils import helper
-import os
+import os, shutil
+
 
 def identify_people(request):
-    keyword = request.POST.get('keyword')
-    file_type = request.POST.get('file_type')
-    file_ = request.FILES.get('file')
-    file_path =  helper.image_save(file_)
-    language = request.POST.get('language')
-    face = request.FILES.get("face_search")
+    try:
+        keyword = request.POST.get("keyword")
+        file_type = request.POST.get("file_type")
+        file_ = request.FILES.get("file")
+        file_path = helper.image_save(file_)
+        language = request.POST.get("language")
+        face = request.FILES.get("face")
 
-    
-    print(keyword, file_path)
-    helper.linker(language=language, search_keyword = keyword, file_format = file_type, file=file_path)
-    directory = 'utils/'
-    file_names = os.listdir(directory)
-    
-    context = {
-        'file_names': file_names,
-    }
+        face_path = ""
+        if face:
+            face_path = helper.face_save(face)
 
-    return render(request, 'result.html', context)    
+        print("-----------Language----------======", language)
+        helper.linker(
+            language=language,
+            search_keyword=keyword,
+            file_format=file_type,
+            file=file_path,
+            face_path=face_path,
+        )
+    except Exception as e:
+        print(e)
+    finally:
+        directory = "utils/results/"
+        file_names = os.listdir(directory)
 
+        context = {
+            "file_names": file_names,
+        }
+        return render(request, "result.html", context)
 
 
 def checking(request):
-    return render(request,"index.html")
-    
+    if os.path.exists("utils/results"):
+        shutil.rmtree("utils/results")
+        os.mkdir("utils/results")
+    return render(request, "index.html")
