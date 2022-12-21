@@ -30,8 +30,8 @@ class ArchiveIdentifier:
         self.face_path = face_path  # path of the face input by the user
 
         self.images_file_dir = "utils/images_file.pdf_dir"
-        # pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
-        pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
+        pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
+        # pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
         self.face_cascade = cv.CascadeClassifier(r"utils/haarcascade.xml")
 
         """
@@ -52,7 +52,8 @@ class ArchiveIdentifier:
         """
         self.zip_file = zipfile.ZipFile(self.file)
         self.inflist = self.zip_file.infolist()
-
+        print("-------------ZIPE FLE---------------", self.zip_file)
+        print("-------------------INFLIST-----------", self.inflist)
         self.image_array = []
 
         self.image_dic = dict()
@@ -211,6 +212,9 @@ class ArchiveIdentifier:
                     print("But there were no faces in that file!")
 
     def convert_image_into_zip(self):
+        if self.file_format=='pdf':
+            self.images_file_dir = "/media/nishant/E/Identify_People_From_Archives/identify/image_file.pdf_dir"
+            print(os.listdir(self.images_file_dir))
         shutil.make_archive("utils/zip_file", "zip", self.images_file_dir)
 
     def convert_pdf_to_images(self):

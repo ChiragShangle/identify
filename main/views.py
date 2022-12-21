@@ -9,7 +9,16 @@ def identify_people(request):
         keyword = request.POST.get("keyword")
         file_type = request.POST.get("file_type")
         file_ = request.FILES.get("file")
-        file_path = helper.image_save(file_)
+
+        file_path = ""
+        if file_type == "image":
+            file_path = helper.image_save(file_)
+        elif file_type=="zip":
+            file_path = helper.zip_save(file_)
+        else:
+            file_path = helper.pdf_save(file_)
+            
+        print("____________FILE PATH______", file_path)
         language = request.POST.get("language")
         face = request.FILES.get("face")
 
