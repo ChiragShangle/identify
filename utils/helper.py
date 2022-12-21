@@ -53,6 +53,21 @@ def face_save(img):
             f.write(chunk)
     return "utils/input_face.jpg"
 
+def zip_save(zip):
+    with open("utils/source.zip", "wb") as f:
+        # Iterate over the chunks of the uploaded file
+        # and write them to the destination file
+        for chunk in zip.chunks():
+            f.write(chunk)
+    return "utils/source.zip"
+
+def pdf_save(pdf):
+    with open("utils/image_file.pdf", "wb") as f:
+        # Iterate over the chunks of the uploaded file
+        # and write them to the destination file
+        for chunk in pdf.chunks():
+            f.write(chunk)
+    return "utils/image_file.pdf"
 
 # define face comparing function
 def face_comparing(app, Image1, Image2):
