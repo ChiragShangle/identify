@@ -30,9 +30,8 @@ class ArchiveIdentifier:
         self.face_path = face_path  # path of the face input by the user
 
         self.images_file_dir = "utils/images_file.pdf_dir"
-        pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
-        # pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files (x86)/Tesseract-OCR"
-        # pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
+        # pytesseract.pytesseract.tesseract_cmd = r"/usr/bin/tesseract"
+        pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
         self.face_cascade = cv.CascadeClassifier(r"utils/haarcascade.xml")
 
         """
@@ -174,7 +173,7 @@ class ArchiveIdentifier:
 
                     """Drawing rectangle and saving the images"""
                     cv.rectangle(
-                        open_cv_image, (top, left), (bottom, right), vermelho, 4
+                        open_cv_image, (x, y), (x+w, y+h), (255,255,0), 4
                     )
 
                     top, left = max(x - 500, 0), max(y - 500, 0)
@@ -222,9 +221,3 @@ class ArchiveIdentifier:
         result = pdf2jpg.convert_pdf2jpg(inputpath, outputpath, pages="ALL")
 
 
-if __name__ == "__main__":
-    obj = ArchiveIdentifier(
-        language="eng", search_keyword="the", file="sdg.jpg", file_format="image"
-    )
-    obj.run()
-    obj.search_and_display()
